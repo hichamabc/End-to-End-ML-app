@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict the amount of food</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="week" placeholder="Week" required="required" />
+      <label for="fname">Centers:</label>
+      <select name=center_id method="GET" action="/">
+        {% for center in centers %}
+        <option value={{center}}>{{center}}</option>
+        {% endfor %}
+      </select> 
+      <label for="fname">Meals:</label>
+		<select name=meal_id method="GET" action="/">
+        {% for meal in meals %}
+        <option value={{meal}}>{{meal}}</option>
+        {% endfor %}
+      </select> 
+    <input type="text" name="checkout_price" placeholder="checkout_price" required="required" />
+    <input type="text" name="base_price" placeholder="base_price" required="required" />
+    <input type="text" name="emailer_for_promotion" placeholder="emailer_for_promotion" required="required" />
+    <input type="text" name="homepage_featured" placeholder="homepage_featured" required="required" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">The amount predicted</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
